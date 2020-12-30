@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Air - Lüften neu definiert | Webserver</title>
+
+    <style>
+        .air {
+            width: 100%;
+            padding: 6px 10px;
+            background-color: rgb(134, 28, 28);
+            color: white;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+        .air:hover{
+            background-color: green;
+        }
+        .air:focus{
+            background-color: blueviolet;
+            outline: none;
+        }
+        .text{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div onclick="change()" class="text" id="starttext">
+    Hier kommt die Page rein
+    </div>
+
+    <button onclick="alarm()" class="air">Knopf</button>
+
+    <script>
+        function change(){
+             document.getElementById("starttext").style.color = "red";
+            
+        }
+        function sleep(milliseconds) {
+            const date = Date.now();
+            let currentDate = null;
+                do {currentDate = Date.now();} 
+                    while (currentDate - date < milliseconds);
+        }
+        function actualchange(normal, neu, text){
+                text.style.color = neu;
+                
+                text.style.color = normal;
+                
+
+        }
+
+        function changecoloroftext(normal, neu, time){
+            var text = document.getElementById("starttext");
+
+            do {actualchange(normal, neu, text)} while (sleep(time)); 
+
+        }
+        function alarm(){
+            console.log('Alert wird gesendet...');
+            alert('Test!');
+            console.log('done');
+            console.warn("for-loop is being started");
+            changecoloroftext("green", "blue" , 2000);
+            console.log("done");
+        }
+    </script>
+</body>
+</html>
