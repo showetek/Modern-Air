@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">    
+    <!--<meta http-equiv="refresh" content="5; URL=http://localhost/Modern%20Air/src/" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../Logo_min.svg" rel="icon" type="image/svg" />   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Modern Air - Lüften neu definiert | Webserver</title>
 
     <style>
@@ -161,7 +163,7 @@
             <div class="box-header">
                 <i class="fas fa-cloud"></i> CO2-Gehalt
             </div>
-            <div class="box-footer">
+            <div class="box-footer" id="co2inhalt">
                 Inhalt
             </div>  
         </div>
@@ -182,7 +184,15 @@
         <img src="../Logo_min.svg" alt="Logo_min" >
         <a href="https://github.com/showetek/Modern-Air"><i class="fab fa-github"></i>GitHub</a>
     </div>
+<script>
+    //UpdateFunction
+    function updateDiv(){ 
     
+    }
+
+    //Updates Intervallmäßig ausführen --> Default 1000ms
+    window.setInterval(updateDiv(), 10000);
+</script>
  
 </body>
 </html>
