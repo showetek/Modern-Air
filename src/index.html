@@ -120,6 +120,81 @@
             justify-content: space-between;  
             flex-wrap: wrap;
         }
+        /* Status */
+        .active_on{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 18px;
+        }
+        .inactive_on{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            margin: 10px;
+            background-color: #f44336;
+            color: white;
+            align-items: center;
+            border-radius: 18px;
+        }
+        .active_off{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            opacity: 0.6;
+            cursor: not-allowed;
+            border-radius: 18px;
+        }
+        .inactive_off{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 100px;
+            padding-right: 100px;
+            margin: 10px;
+            background-color: #f44336;
+            color: white;
+            align-items: center;
+            opacity: 0.6;
+            cursor: not-allowed;
+            border-radius: 18px;
+        }
+        /* Progressbar */
+        .progresslin{
+            width: 100%;
+            background-color: grey;
+            border-radius: 18px;
+        }
+        .barlin{
+            width: 60%;
+            height: 30px;
+            background-color: #29ABE2;
+            border-radius: 12px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+        /* Card */
+        .card{
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 45%;
+        }
+        .heading{
+            text-align: center; 
+            font-size: 17px; 
+            font-weight: bold;  
+            padding-bottom: 10px;
+        }
  
     </style>
 </head>
@@ -146,13 +221,38 @@
         <img src="../Logo.svg" alt="Logo-Banner">
     </div>
 
+    <!--Farblegende-->
+    <div class="box">
+        <div class="box-header">
+            <i class="fas fa-paint-roller"></i> Farblegende
+        </div>
+        <div class="box-footer" style="display: flex; flex-direction: row;" >
+            <div class="barlin" style="background-color: #29ABE2; width: 10%; margin-right: 10px;" >Normal</div>
+            <div class="barlin" style="background-color: #ff9800; width: 10%; margin-right: 10px;" >Hoch</div>
+            <div class="barlin" style="background-color: #f44336; width: 10%; margin-right: 10px;" >Kritisch</div>
+        </div>
+    </div>
+
     <!--Lüfter-->
     <div class="box">
         <div class="box-header">
             <i class="fas fa-fan"></i> Lüfter
         </div>
-        <div class="box-footer">
-            Inhalt
+        <div class="box-footer" style="display: flex; flex-direction: row; justify-content: space-between; align-items: stretch;">
+            <div class="card" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+                <img src="../Fan.svg" alt="Fan" style="max-height: 200px; max-width: 200px;">
+                <div> 
+                    <div class="active_on">🠔 Active 🠖</div>
+                    <div class="inactive_on">Inactive</div>
+                </div>
+                <img src="../Fan.svg" alt="Fan" style="max-height: 200px; max-width: 200px;">
+            </div>
+            <div class="card" style="display: flex; flex-direction: column; justify-content: center;">   
+                <div class="heading"><i class="fas fa-redo"></i> Lüfterumderhungen</div>
+                <div class="progresslin">
+                    <div class="barlin" style="width: 60%;">836 RPM</div>
+                </div>
+            </div>            
         </div>
     </div>
 
@@ -163,9 +263,21 @@
             <div class="box-header">
                 <i class="fas fa-cloud"></i> CO2-Gehalt
             </div>
-            <div class="box-footer" id="co2inhalt">
-                Inhalt
-            </div>  
+            <div class="box-footer" style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;" >
+                <div class="card">
+                    <div class="heading"><i class="fas fa-home"></i> In-CO2</div>
+                    <div class="progresslin">
+                        <div class="barlin" style="width: 60%; background-color: #ff9800;">1266 PPM</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="heading"><i class="fas fa-leaf"></i> Out-CO2</div>
+                    <div class="progresslin">
+                        <div class="barlin" style="width: 24%;">421 PPM</div>
+                    </div>
+                </div>
+            </div> 
+             
         </div>
 
         <!--Tmp-->
@@ -173,8 +285,19 @@
             <div class="box-header">
                 <i class="fas fa-thermometer-half"></i> Temperatur
             </div>
-            <div class="box-footer">
-                Inhalt
+            <div class="box-footer" style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;" >
+                <div class="card">
+                    <div class="heading"><i class="fas fa-home"></i> In-Tmp</div>
+                    <div class="progresslin">
+                        <div class="barlin" style="width: 100%; background-color: #f44336;">30 °C</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="heading"><i class="fas fa-leaf"></i> Out-Tmp</div>
+                    <div class="progresslin">
+                        <div class="barlin" style="width: 30%;">10 °C</div>
+                    </div>
+                </div>
             </div>  
         </div>
     </div>
@@ -189,9 +312,29 @@
     function updateDiv(){ 
     
     }
-
+/*
+var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML = width + "%";
+      }
+    }
+  }
+}
+*/
     //Updates Intervallmäßig ausführen --> Default 1000ms
-    window.setInterval(updateDiv(), 10000);
+    window.setInterval(updateDiv(), 1000);
 </script>
  
 </body>
