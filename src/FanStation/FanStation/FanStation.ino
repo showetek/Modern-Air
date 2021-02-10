@@ -4,10 +4,9 @@
 //SoftwareSerial
 SoftwareSerial komm(4, 3);
 
-//Var
 int pwm = 0;
 
-//Setup
+
 void setup() {
  komm.begin(115200);
  Serial.begin(9600);
