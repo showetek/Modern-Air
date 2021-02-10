@@ -7,7 +7,7 @@
 * [Paul Paysan](https://github.com/PaulPaysan)
 
 ## **Boards**
-*In unsresem Projekt benutzen wir folgende Boards:*
+*In unserem Projekt benutzen wir folgende Boards:*
 * Arduino Uno
 * LOLIN WeMos D1 R2 WiFi ESP8266
 * LOLIN WeMos D1 Mini Lite
