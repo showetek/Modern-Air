@@ -1,9 +1,10 @@
 #include <SoftwareSerial.h>   //using software serial so as not to conflict with serial download
 SoftwareSerial mySerial(0, 1); // RX, TX
 
+//Var
 int pwm = 0;
 
-
+//Setup
 void setup() {
 
   mySerial.begin(115200); //setup software serial
