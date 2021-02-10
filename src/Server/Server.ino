@@ -7,8 +7,8 @@
 
 //Define
 #ifndef STASSID
-#define STASSID "WIFI-SSID"
-#define STAPSK  "WIFI-PASS"
+#define STASSID "SSID"
+#define STAPSK  "PASS"
 #endif
 
 //Const Var
@@ -22,7 +22,7 @@ String result = "";
 int pwm = 0;
 
 //SoftwareSerial
-SoftwareSerial komm(D3, D4);
+SoftwareSerial komm(D5, D6);
 
 //Webserver erstellen
 ESP8266WebServer server(80);
@@ -63,16 +63,16 @@ void handleForm() {
 
     //PWM werte senden
     pwm = map(co2_in.toInt(), 400, 2000, 75, 255);
-
-    komm.write(pwm);
+    komm.print(pwm);
    
   }
 }
 
 //Setup
 void setup(void) {
-  Serial.begin(9600);         //Serielle Verbindung mit Monitor
   komm.begin(115200);
+
+  Serial.begin(9600);//Serielle Verbindung mit Monitor
   WiFi.begin(ssid, password); //WIFI Verbinden
   Serial.println("");
 
