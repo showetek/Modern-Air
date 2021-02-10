@@ -1,21 +1,25 @@
-//Libs
-#include <SoftwareSerial.h>
-
-//SoftwareSerial
-SoftwareSerial komm(4, 3);
+#include <SoftwareSerial.h>   //using software serial so as not to conflict with serial download
+SoftwareSerial mySerial(0, 1); // RX, TX
 
 int pwm = 0;
 
 
 void setup() {
- komm.begin(115200);
- Serial.begin(9600);
+
+  mySerial.begin(115200); //setup software serial
+  Serial.begin(115200);    //setup serial monitor
+  pinMode(9,OUTPUT);
 }
 
-//Mainloop des Hauptprogrammes
-void loop() {
-   pwm = komm.read();
-   Serial.println(pwm);
-   analogWrite(9,pwm);
-   delay(5000);
+void loop()  {
+
+  while (mySerial.available() == 0) { }
+  pwm = mySerial.parseInt();
+  
+
+//print received values to serial monitor
+  Serial.println(pwm);
+  analogWrite(9,pwm);
+
+  delay(100);
 }
