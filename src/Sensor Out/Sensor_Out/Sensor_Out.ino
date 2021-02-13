@@ -54,7 +54,7 @@ void post(String key1, String key2){
     http.begin("http://192.168.178.75:80/postform/");      //Specify request destination
     http.addHeader("Content-Type", "text/plain");  //Specify content-type header
  
-    int httpCode = http.POST("CO2_in="+ key1 + "," + key2 +",");   //Send the request
+    int httpCode = http.POST("CO2_out=" + key1 + "," + key2 +",");   //Send the request
     String payload = http.getString();                  //Get the response payload
  
     Serial.println(httpCode);   //Print HTTP return code
