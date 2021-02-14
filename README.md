@@ -1,4 +1,4 @@
-![Modern Air Logo](Logo.svg)
+![Modern Air Logo](img/Logo.svg)
 ## **Projektbeschreibung**
 *Dies ist der Sourcecode des Jufo-Projektes "Modern Air - Lüften neu definiert" zur Wettbewerbsrunde 2021*
 
@@ -19,6 +19,8 @@
 ## **Wiring**
 ### FanStation
 
-><img src="FanStation_Steckplatine.svg" width="70%" />
+><img src="img/FanStation_Steckplatine.svg" width="70%" />
 ### Sensor
-><img src="Sensor_Steckplatine.svg" width="30%" />
+><img src="img/Sensor_Steckplatine.svg" width="30%" />
+
+## **[ToDo-Liste](TODO.md)**
