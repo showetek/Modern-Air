@@ -2,7 +2,6 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">    
-    <!--<meta http-equiv="refresh" content="5; URL=http://localhost/Modern%20Air/src/" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../img/Logo_min.svg" rel="icon" type="image/svg" />   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
@@ -268,7 +267,7 @@
             padding: 20px;
             border: 2px solid;
             border-color:#c1ddff;
-            width: 50%;
+            width: 60%;
             border-radius: 10px; 
         }
         .close {
@@ -355,14 +354,14 @@
                 
                 <input type="number" id="co2_wert" placeholder="CO2-Wert" name="co2_wert" min="400" max="2000" required>
                 <label for="co2_wert">CO2 Wert in ppm (400-2000)</label><br>
-                <input type="number" id="co2_time" placeholder="Zeit-Wert" name="time_wert" min="0" required>
+                <input type="number" id="time_co2" placeholder="Zeit-Wert" name="time_wert" min="0" max="15000" required>
                 <label for="co2_time">Zeit in ms</label><br>
             </form>
 
 
 
             <div style="text-align: right;">
-            <button class="activebutton_on" onclick="submitCO2()">CO2 senden</button>
+            <button class="activebutton_on" onclick="submitForm('modal_co2', '#co2_form', 'ort_wert', 'co2_wert', 'time_co2')">CO2 senden</button>
             <button class="inactivebutton_on" onclick="closemodal('modal_co2')">Abbrechen</button>
             </div>
         </div>
@@ -385,12 +384,12 @@
                 
                 <input type="number" id="tmp_wert" placeholder="Tmp-Wert" name="tmp_wert" min="-40" max="30" required>
                 <label for="tmp_wert">Tmp Wert in °C (-40-30)</label><br>
-                <input type="number" id="tmp_time" placeholder="Zeit-Wert" name="time_wert" min="0" required>
+                <input type="number" id="time_tmp" placeholder="Zeit-Wert" name="time_wert" min="0" max="15000" required>
                 <label for="tmp_time">Zeit in ms</label><br>                 
             </form>
 
             <div style="text-align: right;">
-            <button class="activebutton_on" onclick="submitForm('modal_tmp, tmp_form, ort_wert, tmp_wert, time_wert')">Tmp senden</button>
+            <button class="activebutton_on" onclick="submitForm('modal_tmp', '#tmp_form', 'ort_wert', 'tmp_wert', 'time_tmp')">Tmp senden</button>
             <button class="inactivebutton_on" onclick="closemodal('modal_tmp')">Abbrechen</button>
             </div>
         </div>
@@ -410,11 +409,11 @@
             <div><i class="fas fa-paint-roller"></i> Farblegende</div>
         </div>
         <div class="box-footer" style="display: flex; flex-direction: row;" >
-            <div class="barlin" style="background-color: #29ABE2; width: 10%; margin-right: 10px;" >Normal</div>
-            <div class="barlin" style="background-color: #ff9800; width: 10%; margin-right: 10px;" >Hoch</div>
-            <div class="barlin" style="background-color: #f44336; width: 10%; margin-right: 10px;" >Kritisch</div>
+            <div class="barlin" style="background-color: #29ABE2; width: 20%; margin-right: 10px;" >Normal</div>
+            <div class="barlin" style="background-color: #ff9800; width: 20%; margin-right: 10px;" >Hoch</div>
+            <div class="barlin" style="background-color: #f44336; width: 20%; margin-right: 10px;" >Kritisch</div>
             
-            <a href="#update" onclick="update()" class="barlin" style="background-color: #29ABE2; width: 10%; margin-left: 10px;" ><i class="fas fa-redo"></i>Refresh</a>
+            <a href="#update" onclick="update()" class="barlin" style="background-color: #29ABE2; width: 20%; margin-left: 10px;" ><i class="fas fa-redo"></i>Refresh</a>
         </div>
     </div>
 
@@ -432,7 +431,7 @@
             <div class="card" style="display: flex; flex-direction: column; justify-content: center;">   
                 <div class="heading"><i class="fas fa-redo"></i> Lüfterumderhungen</div>
                 <div class="progresslin">
-                    <div class="barlin" style="width: 60%;">836 RPM</div>
+                    <div class="barlin" id="rpm_display" style="width: 60%;">836 RPM</div>
                 </div>
             </div>            
         </div>
@@ -449,13 +448,13 @@
                 <div class="card">
                     <div class="heading"><i class="fas fa-home"></i> In-CO2</div>
                     <div class="progresslin">
-                        <div class="barlin" style="width: 60%; background-color: #ff9800;">1266 PPM</div>
+                        <div class="barlin" id="co2_in_display" style="width: 60%; background-color: #ff9800;">1266 PPM</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="heading"><i class="fas fa-leaf"></i> Out-CO2</div>
                     <div class="progresslin">
-                        <div class="barlin" style="width: 24%;">421 PPM</div>
+                        <div class="barlin" id="co2_out_display" style="width: 24%;">421 PPM</div>
                     </div>
                 </div>
             </div> 
@@ -471,13 +470,13 @@
                 <div class="card">
                     <div class="heading"><i class="fas fa-home"></i> In-Tmp</div>
                     <div class="progresslin">
-                        <div class="barlin" style="width: 100%; background-color: #f44336;">30 °C</div>
+                        <div class="barlin" id="tmp_in_display" style="width: 100%; background-color: #f44336;">30 °C</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="heading"><i class="fas fa-leaf"></i> Out-Tmp</div>
                     <div class="progresslin">
-                        <div class="barlin" style="width: 30%;">10 °C</div>
+                        <div class="barlin" id="tmp_out_display" style="width: 30%;">10 °C</div>
                     </div>
                 </div>
             </div>  
@@ -528,34 +527,30 @@
         }
     }
 
-    //submitCO2
-    function submitCO2(){
-        submitForm("modal_co2", "co2_form", "ort_wert", "co2_wert", "time_wert");
-    }
-
-
     //validateForm
     function validateForm(form_id, name_wert, name_time) {
         var result = true;
         var messsage = "";
 
-        var x = document.forms[form_id][name_wert].value;
-            if (x == "") {
-                messsage = messsage + "Das Feld "+x.attr("placeholder")+" muss gefüllt sein!\n";
-                result = false;
-            }
-            if (parseInt(x.val()) > parseInt(x.attr("max")) || parseInt(x.val()) < parseInt(x.attr("min")) ) {
-                messsage = messsage + "Das Feld "+x.attr("placeholder")+" muss eine Zahl zwischen "+x.attr("min")+" und "+x.attr("max")+ "sein!\n";
-                result = false;
-            }
+        
 
-        var x = document.forms[form_id][name_time];
+        var x = $("#"+ name_wert);
             if (x.val() == "") {
                 messsage = messsage + "Das Feld "+x.attr("placeholder")+" muss gefüllt sein!\n";
                 result = false;
             }
             if (parseInt(x.val()) > parseInt(x.attr("max")) || parseInt(x.val()) < parseInt(x.attr("min")) ) {
-                messsage = messsage + "Das Feld "+x.attr("placeholder")+" muss eine Zahl zwischen "+x.attr("min")+" und "+x.attr("max")+ "sein!\n";
+                messsage = messsage + "Das Feld "+x.attr("placeholder")+" muss eine Zahl zwischen "+x.attr("min")+" und "+x.attr("max")+ " sein!\n";
+                result = false;
+            }
+
+        var x = $("#"+ name_time);
+            if (x.val() == "") {
+                messsage = messsage + "Das Feld "+x.attr("placeholder")+" muss gefüllt sein!\n";
+                result = false;
+            }
+            if (parseInt(x.val()) > parseInt(x.attr("max")) || parseInt(x.val()) < parseInt(x.attr("min")) ) {
+                messsage = messsage + "Das Feld "+x.attr("placeholder")+" muss eine Zahl zwischen "+x.attr("min")+" und "+x.attr("max")+ " sein!\n";
                 result = false;
             }
 
@@ -573,26 +568,28 @@
         var answer = "";
         var arg_wert = "";
         var arg_time = "";
-        var ort  = document.forms[form_id][name_ort];
-        var wert = document.forms[form_id][name_wert];
-        var time = document.forms[form_id][name_time];
-        
 
-        for (let i = 0; i < length(name_wert); i++) {
+        var ort  = $("input:radio[name="+name_ort+"]:checked");
+        var wert = $("#"+name_wert);
+        var time = $("#"+name_time);
+       
+        var x = $(form_id).serializeArray;
+
+        for (let i = 0; i < name_wert.length; i++) {
             arg_wert = arg_wert + name_wert[i];  
             if (name_wert[i] == '_') {
                    break;
             }
         }
 
-        for (let i = 0; i < length(name_time); i++) {
-            arg_time = arg_time + name_wert[i];  
-            if (name_wert[i] == '_') {
+        for (let i = 0; i < name_time.length; i++) {
+            arg_time = arg_time + name_time[i];  
+            if (name_time[i] == '_') {
                    break;
             }
         }
         
-        //co2_in=200,time=200,
+       
         answer = arg_wert + ort.val() + "=" + wert.val() + "," + arg_time + ort.val() + "=" + time.val() + ",";
         return answer;
     }
@@ -629,20 +626,39 @@
         var ip = location.host;
         var xhttp = new XMLHttpRequest();
 
-        xhttp.open("GET", "http://"+ip+"/getform/"+arg, false ); // false for synchronous request
+        xhttp.open("GET", "http://"+ip+"/getform/?data="+arg, false ); // false for synchronous request
         xhttp.send(null);
     
         return xhttp.responseText;
     }
 
     //Update DIV
-    function updateDiv(arg) {
-        move(get(arg));
+    function updateDisplay(get_arg, display, max) {
+        var data = get(get_arg);
+        var element = document.getElementById(display);
+        width = ((parseInt(data) / max) * 100).toString();
+
+        if (get_arg == "co2_out" || get_arg == "co2_in") {
+            element.innerHTML = data + " PPM";    
+        }
+        if (get_arg == "tmp_out" || get_arg == "tmp_in") {
+            element.innerHTML = data + " °C";    
+        }
+        if (get_arg == "rpm") {
+            element.innerHTML = data + " RPM";    
+        }
+
+        element.setAttribute("style","width:"+width+"%");
     }
 
     //UpdateFunction
     function update(){ 
-        updateDiv();
+        updateDisplay("co2_in", "co2_in_display", 2000);
+        updateDisplay("co2_out", "co2_out_display", 2000);
+        updateDisplay("tmp_in", "tmp_in_display", 30);
+        updateDisplay("tmp_out", "tmp_out_display", 30);
+        updateDisplay("rpm", "rpm_display", 5500);
+        console.log('info');
     }
 
 
@@ -666,13 +682,8 @@
     }
     }
 
-    //Updates Intervallmäßig ausführen --> Default 1000ms (machts aber nur einmal am anfang)
-    window.setInterval(update(), 1000);
-    /*
-    while (true) {
-        update();    
-    }
-    */
+    //Updates Intervallmäßig ausführen --> Default 1000ms
+    $('document').ready(setInterval("update()", 1000));
 </script>
  
 </body>
