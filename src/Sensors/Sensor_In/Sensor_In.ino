@@ -95,10 +95,10 @@ void setup()
 //Mainloop des Hauptprogrammes
 void loop()
 {
+  delay(5000);
   CO2Wert = leseCO2();       // MH-Z19 CO2 Sensor lesen
   tmpWert = lesetmp();
   post(String(leseCO2()), String(lesetmp()));
   Serial.println(CO2Wert);
   Serial.println(tmpWert);
-  delay(5000);
 }
