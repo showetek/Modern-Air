@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../img/Logo_min.svg" rel="icon" type="image/svg" />   
+    <link href="https://raw.githubusercontent.com/showetek/Modern-Air/e3f5907cb627eb1ce78387f5bfc38c61fcba2572/img/Logo_min.svg" rel="icon" type="image/svg" />   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -138,7 +138,7 @@
         }
         .container {
             margin: 20px 10% 20px 10%;
-            display: flex;
+            display: block;
             flex-direction: row;
             justify-content: space-between;  
             flex-wrap: wrap;
@@ -281,7 +281,21 @@
             text-decoration: none;
             cursor: pointer;
         }
- 
+        /* FormContent */
+        input[type=number]{
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+        input[type=number]:focus, input[type=number]:hover{
+            outline: none;
+        }
+
     </style>
 </head>
 <body>
@@ -347,15 +361,17 @@
             <h2>CO2-Eintragen</h2>
 
             <form action="postform/" id="co2_form" target="_blank" rel="noopener" enctype="text/plain" method="post">
+                <label for="co2_in">Location</label><br>
                 <input type="radio" id="co2_in" name="ort_wert" value="in" checked>
                 <label for="co2_in">In</label><br>
                 <input type="radio" id="co2_out" name="ort_wert" value="out">
                 <label for="co2_out">Out</label><br><br> 
                 
-                <input type="number" id="co2_wert" placeholder="CO2-Wert" name="co2_wert" min="400" max="2000" required>
                 <label for="co2_wert">CO2 Wert in ppm (400-2000)</label><br>
+                <input type="number" id="co2_wert" placeholder="CO2-Wert" name="co2_wert" min="400" max="2000" required>
+                <label for="co2_time">Zeit in ms (0-15000)</label><br>
                 <input type="number" id="time_co2" placeholder="Zeit-Wert" name="time_wert" min="0" max="15000" required>
-                <label for="co2_time">Zeit in ms</label><br>
+                
             </form>
 
 
@@ -377,15 +393,17 @@
             <h2>Tmp-Eintragen</h2>
 
             <form action="postform/" id="tmp_form" target="_blank" rel="noopener" enctype="text/plain" method="post">
+                <label for="tmp_in">Location</label><br>
                 <input type="radio" id="tmp_in" name="ort_wert" value="in" checked>
                 <label for="tmp_in">In</label><br>
                 <input type="radio" id="tmp_out" name="ort_wert" value="out">
                 <label for="tmp_out">Out</label><br><br> 
                 
-                <input type="number" id="tmp_wert" placeholder="Tmp-Wert" name="tmp_wert" min="-40" max="30" required>
                 <label for="tmp_wert">Tmp Wert in °C (-40-30)</label><br>
+                <input type="number" id="tmp_wert" placeholder="Tmp-Wert" name="tmp_wert" min="-40" max="30" required>
+                <label for="tmp_time">Zeit in ms (0-15000)</label><br>             
                 <input type="number" id="time_tmp" placeholder="Zeit-Wert" name="time_wert" min="0" max="15000" required>
-                <label for="tmp_time">Zeit in ms</label><br>                 
+                    
             </form>
 
             <div style="text-align: right;">
@@ -398,7 +416,7 @@
 
     <!--Banner-->
     <div class="banner">
-        <img src="../img/Logo.svg" alt="Logo-Banner">
+        <img src="https://raw.githubusercontent.com/showetek/Modern-Air/e3f5907cb627eb1ce78387f5bfc38c61fcba2572/img/Logo.svg" alt="Logo-Banner">
     </div>
 
   
@@ -424,14 +442,14 @@
         </div>
         <div class="box-footer" style="display: flex; flex-direction: row; justify-content: space-between; align-items: stretch;">
             <div class="card" >
-                <div class="active_on">Active</div>
-                <div class="inactive_off">Inactive</div>
+                <div id="active_button" class="active_on">Active</div>
+                <div id="inactive_button" class="inactive_off">Inactive</div>
             </div>
 
             <div class="card" style="display: flex; flex-direction: column; justify-content: center;">   
-                <div class="heading"><i class="fas fa-redo"></i> Lüfterumderhungen</div>
+                <div class="heading"><i class="fas fa-redo"></i> Lüfterumdrehungen</div>
                 <div class="progresslin">
-                    <div class="barlin" id="rpm_display" style="width: 60%;">836 RPM</div>
+                    <div class="barlin" id="rpm_display" style="width: 100%;"> Default</div>
                 </div>
             </div>            
         </div>
@@ -440,7 +458,7 @@
     <!--Container-->
     <div class="container">
         <!--CO2-->
-        <div style="width: 49%;">
+        <div style="width: 100%; margin-bottom: 20px;">
             <div class="box-header">
                 <i class="fas fa-cloud"></i> CO2-Gehalt
             </div>
@@ -448,13 +466,13 @@
                 <div class="card">
                     <div class="heading"><i class="fas fa-home"></i> In-CO2</div>
                     <div class="progresslin">
-                        <div class="barlin" id="co2_in_display" style="width: 60%; background-color: #ff9800;">1266 PPM</div>
+                        <div class="barlin" id="co2_in_display" style="width: 100%;">Default</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="heading"><i class="fas fa-leaf"></i> Out-CO2</div>
                     <div class="progresslin">
-                        <div class="barlin" id="co2_out_display" style="width: 24%;">421 PPM</div>
+                        <div class="barlin" id="co2_out_display" style="width: 100%;">Default</div>
                     </div>
                 </div>
             </div> 
@@ -462,7 +480,7 @@
         </div>
 
         <!--Tmp-->
-        <div style="width: 49%;">
+        <div style="width: 100%;">
             <div class="box-header">
                 <i class="fas fa-thermometer-half"></i> Temperatur
             </div>
@@ -470,13 +488,13 @@
                 <div class="card">
                     <div class="heading"><i class="fas fa-home"></i> In-Tmp</div>
                     <div class="progresslin">
-                        <div class="barlin" id="tmp_in_display" style="width: 100%; background-color: #f44336;">30 °C</div>
+                        <div class="barlin" id="tmp_in_display" style="width: 100%;">Default</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="heading"><i class="fas fa-leaf"></i> Out-Tmp</div>
                     <div class="progresslin">
-                        <div class="barlin" id="tmp_out_display" style="width: 30%;">10 °C</div>
+                        <div class="barlin" id="tmp_out_display" style="width: 100%;">Default</div>
                     </div>
                 </div>
             </div>  
@@ -506,12 +524,12 @@
     <div style="padding-left: 10%; padding-right: 10%; background-color: whitesmoke;">
     <div class="footer">
         <a href="#modal_impressum" onclick="showmodal('modal_impressum')"><i class="fas fa-info-circle"></i>Impressum</a>
-        <img src="../img/Logo_min.svg" alt="Logo_min" >
+        <img src="https://raw.githubusercontent.com/showetek/Modern-Air/e3f5907cb627eb1ce78387f5bfc38c61fcba2572/img/Logo_min.svg" alt="Logo_min" >
         <a href="https://github.com/showetek/Modern-Air" target="_blank" rel="noopener"><i class="fab fa-github"></i>GitHub</a>
     </div>
     </div>
 <script>
-    //Modal
+    /* Modal */
     function showmodal(id){
         modal = document.getElementById(id);
         modal.style.display = "block";        
@@ -525,9 +543,9 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
-    }
+    };
 
-    //validateForm
+    /* validateForm */
     function validateForm(form_id, name_wert, name_time) {
         var result = true;
         var messsage = "";
@@ -563,7 +581,7 @@
         return result;
     }
 
-    //generatePostString
+    /* generatePostString */
     function generatePostString(form_id, name_ort, name_wert, name_time) {
         var answer = "";
         var arg_wert = "";
@@ -596,7 +614,7 @@
 
 
 
-    //submitForm
+    /* submitForm */
     function submitForm(modal_id, form_id, name_ort, name_wert, name_time) {        
         if (validateForm(form_id, name_wert, name_time)) {
             post(generatePostString(form_id, name_ort, name_wert, name_time));
@@ -604,39 +622,40 @@
         }
     }
 
-    //resetForm
+    /* resetForm */
     function resetForm(id) {
         form = document.getElementById(id);
         form.reset();
     }
 
-    //POST
+    /* POST */
     function post(arg){
         var ip = location.host;
         var xhttp = new XMLHttpRequest();
         
-        xhttp.open("POST", "http://"+ip+"/postform/", true); // true for asynchronous request
+        xhttp.open("POST", "http://"+ip+"/postform/", true); /* true for asynchronous request */
         xhttp.setRequestHeader("Content-type", "text/plain");
         xhttp.send(arg);
     
     }
 
-    //GET
+    /* GET */
     function get(arg) {
         var ip = location.host;
         var xhttp = new XMLHttpRequest();
 
-        xhttp.open("GET", "http://"+ip+"/getform/?data="+arg, false ); // false for synchronous request
+        xhttp.open("GET", "http://"+ip+"/getform/?data="+arg, false ); /* false for synchronous request */
         xhttp.send(null);
     
         return xhttp.responseText;
     }
 
-    //Update DIV
-    function updateDisplay(get_arg, display, max) {
+    /* updateDisplay */
+    function updateDisplay(get_arg, display, max, colorswitch1, colorswitch2) {
         var data = get(get_arg);
         var element = document.getElementById(display);
-        width = ((parseInt(data) / max) * 100).toString();
+        var width = ((parseInt(data) / max) * 100).toString();
+        var color = '';
 
         if (get_arg == "co2_out" || get_arg == "co2_in") {
             element.innerHTML = data + " PPM";    
@@ -648,42 +667,54 @@
             element.innerHTML = data + " RPM";    
         }
 
-        element.setAttribute("style","width:"+width+"%");
+        if (parseInt(data) < colorswitch1 ) {
+            color = '#29ABE2';
+        }
+        if (parseInt(data) >= colorswitch1 && parseInt(data) < colorswitch2 ) {
+            color = '#ff9800';
+        }
+        if (parseInt(data) >= colorswitch2) {
+            color = '#f44336';
+        }
+
+        element.setAttribute("style","width:"+width+"%; background-color:"+color+";");
     }
 
-    //UpdateFunction
+    /* updateStatus */
+    function updateStatus(get_arg, active_button, inactive_button) {
+        var data = get(get_arg);
+        var active_element = document.getElementById(active_button);
+        var inactive_element = document.getElementById(inactive_button);
+
+        if (data == "on") {
+            active_element.classList.remove('active_off');
+            inactive_element.classList.remove('inactive_on');
+
+            active_element.classList.add('active_on');
+            inactive_element.classList.add('inactive_off');  
+        }
+        if (data == "off") {
+            active_element.classList.remove('active_on');
+            inactive_element.classList.remove('inactive_off');
+
+            active_element.classList.add('active_off');
+            inactive_element.classList.add('inactive_on');  
+        }
+    }
+
+    /* UpdateFunction */
     function update(){ 
-        updateDisplay("co2_in", "co2_in_display", 2000);
-        updateDisplay("co2_out", "co2_out_display", 2000);
-        updateDisplay("tmp_in", "tmp_in_display", 30);
-        updateDisplay("tmp_out", "tmp_out_display", 30);
-        updateDisplay("rpm", "rpm_display", 5500);
-        console.log('info');
+        updateDisplay("co2_in", "co2_in_display", 3500, 1200 ,1800);
+        updateDisplay("co2_out", "co2_out_display", 2000, 1200 ,1500);
+        updateDisplay("tmp_in", "tmp_in_display", 30, 25, 28);
+        updateDisplay("tmp_out", "tmp_out_display", 30, 25, 28);
+        updateDisplay("rpm", "rpm_display", 5500, 4000, 5000);
+        updateStatus('fan', 'active_button', 'inactive_button');
     }
 
-
-    function move() {
-        var i = 0;
-    if (i == 0) {
-        i = 1;
-        var elem = document.getElementById("myBar");
-        var width = 10;
-        var id = setInterval(frame, 10);
-        function frame() {
-        if (width >= 100) {
-            clearInterval(id);
-            i = 0;
-        } else {
-            width++;
-            elem.style.width = width + "%";
-            elem.innerHTML = width + "%";
-        }
-        }
-    }
-    }
-
-    //Updates Intervallmäßig ausführen --> Default 1000ms
-    $('document').ready(setInterval("update()", 1000));
+    /* Updates Intervallmäßig ausführen --> Default 1000ms */
+   /* $('document').ready(setInterval("update()", 1000)); */
+   $('document').ready(update());
 </script>
  
 </body>
