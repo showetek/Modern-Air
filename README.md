@@ -14,7 +14,12 @@
 
 ## **Libraries**
 *Folgende externe Bibliotheken werden weitergehend im Code genutzt:*
+### Arduino:
 * [Arduino core for ESP8266 WiFi chip](https://github.com/esp8266/Arduino)
+### Website:
+* [Font Awesome 5](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css)
+* [W3.CSS](https://www.w3schools.com/w3css/4/w3.css)
+* [jQuery 3.5](https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js)
 
 ## **Wiring**
 ### FanStation
