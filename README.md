@@ -21,6 +21,9 @@
 * [W3.CSS](https://www.w3schools.com/w3css/4/w3.css)
 * [jQuery 3.5](https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js)
 
+## **Communication**
+><img src="img/CommunicationModel.png" />
+
 ## **Wiring**
 ### FanStation
 
